@@ -17,10 +17,12 @@ Openlayers 기본지도 생성, WMTS API
 <div id="map" style="width: 100%; height: 400px; left: 0px; top: 0px"></div>
 <!--토글 버튼을 만들어 보자-->
 <div>
-    <button>위성사진</button>
+    <button onclick="AddSatellite()">위성사진</button>
 </div>
 
 <script type="text/javascript">
+
+    let checkSatellite = false;
 
     let Base = new ol.layer.Tile({
         name : "Base",
@@ -58,7 +60,7 @@ Openlayers 기본지도 생성, WMTS API
     */
     let map = new ol.Map({
 //        layers: [OSM,Base], //[OSM,Base,debug]
-        layers: [Base,Satellite], // <---Base가 VWorld의 베이스임. []빼도 될 것이라 생각했으나, 빼면 오류 뜬다.
+        layers: [Base], // <---Base가 VWorld의 베이스임. []빼도 될 것이라 생각했으나, 빼면 오류 뜬다.
         target: 'map',
         view: new ol.View({
             center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/*좌표계 변환
@@ -67,6 +69,19 @@ Openlayers 기본지도 생성, WMTS API
 
         })// 뷰 설정
     });//
+
+
+    function AddSatellite(){    //위성사진 버튼을 클릭하면 layer 추가
+        if(checkSatellite){
+            map.removeLayer(Satellite);  //removeLayer 메소드 이용하기 좋다.
+            // map.addLayer(Base);
+            console.log(checkSatellite);
+            checkSatellite = false;
+        } else{
+        map.addLayer(Satellite);    //addLayer 메소드 이용하기 좋다.
+        checkSatellite = true;
+        }
+    }
 </script>
 </body>
 </html>
