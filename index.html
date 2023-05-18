@@ -38,7 +38,6 @@
             map = new OpenLayers.Map('map', options);
 
             var options = {
-                center : ,
                 serviceVersion : "",
                 layername: "",
                 isBaseLayer: false,
@@ -69,10 +68,11 @@
 
 /*
 오른쪽에 라디오버튼 생성 및 지도 변환
+ */
             var switcherControl = new OpenLayers.Control.LayerSwitcher();
             map.addControl(switcherControl);
             switcherControl.maximizeControl();
-*/
+
 
             map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
             map.zoomTo(11);
