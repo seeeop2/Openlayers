@@ -134,5 +134,17 @@ function removeAll(){    //'Reset' 버튼을 클릭하면 Base 레이어만 남�
     checkHybrid = false;
 }
 
+$("#zoom-in").click(function(){
+    const view = map.getView();     //const 상수라 중복되는 것이 싫어서 함수 밖에 선언했으나, 한번만 확대, 축소가 되는 현상이 발생
+    const zoom = view.getZoom();    //따라서, 함수 안에 선언 해주는 것이 맞는 듯
+    view.setZoom(zoom + 1);
+})
+
+$("#zoom-out").click(function(){
+    const view = map.getView();
+    const zoom = view.getZoom();
+    view.setZoom(zoom - 1);
+
+})
 
 /*======================================클릭 이벤트 모음======================================*/

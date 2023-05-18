@@ -16,7 +16,7 @@ Openlayers 기본지도 생성, WMTS API
 
 <body>
 <!--map을 띄울 div박스. 여기서는 style을 태그에 바로 적용시켰다.-->
-<div id="map" style="width: 100%; height: 400px; left: 0px; top: 0px"></div>
+<div id="map" style="width: 100%; height: 600px; left: 0px; top: 0px"></div>
 <!--토글 버튼을 만들어 보자-->
 <div>
     <button onclick="addSatellite()">위성사진</button>
@@ -24,7 +24,10 @@ Openlayers 기본지도 생성, WMTS API
     <button onclick="addMidnight()">midnight</button>
     <button onclick="addHybrid()">Hybrid</button>
     <button onclick="removeAll()">Reset</button>
-
+</div>
+<div style="margin: 10px 0;">
+    <button id="zoom-out">Zoom out</button>
+    <button id="zoom-in">Zoom in</button>
 </div>
 
 
