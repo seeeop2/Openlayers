@@ -1,52 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "//www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
+<!--
+Openlayers 기본지도 생성, WMTS API
+-->
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title>baseMap</title>
-
-    <!-- API key를 포함하여 브이월드 API URL을 지정하여 호출 시작  -->
-    <script type="text/javascript" src="https://map.vworld.kr/js/vworldMapInit.js.do?apiKey=@CDDF079B-472D-3902-8B7F-AE128D812736"></script>
-    <!-- API key를 포함하여 브이월드 API URL을 지정하여 호출끝  -->
-    <style>
-        div.olControlScaleLine {
-            left: auto;
-            bottom:10px;
-            font-size:xx-small;
-            right:10px;
-            background-color:white;
-            margin: 20 20 20 20;
-            border:solid white 10px;
-
-        }
-    </style>
-    <script type="text/javascript">
-
-        var apiMap;//2D map
-        vworld.showMode = true;//브이월드 배경지도 설정 컨트롤 유무(true:배경지도를 컨트롤 할수 있는 버튼 생성/false:버튼 해제)
-        /**
-         * - rootDiv, mapType, mapFunc, 3D initCall, 3D failCall
-         * - 브이월드 5가지 파라미터를 셋팅하여 지도 호출
-         */
-        vworld.init("vMap", "map-first",
-            function() {
-                apiMap = this.vmap;//브이월드맵 apiMap에 셋팅
-                apiMap.setBaseLayer(apiMap.vworldBaseMap);//기본맵 설정
-                apiMap.setControlsType({"simpleMap":true});	//간단한 화면
-                apiMap.addVWORLDControl("zoomBar");
-                apiMap.setCenterAndZoom(14153034.043823106,4501305.261406751,17);//화면중심점과 레벨로 이동 (초기 화면중심점과 레벨)
-
-            }
-        );
-
-
-
-    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>브이월드 WMTS 배경지도 사용하기 오픈레이어스 3버전 이상</title>
+    <script src="ol/ol.js"></script>
+    <link rel="stylesheet" 	href="ol/ol.css" type="text/css">
+    <!--제이쿼리 사용을 위한 CDN-->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 </head>
-<body>
 
-<!-- 지도가 들어갈 영역 시작 -->
-<div id="vMap" style="width:100%;height:650px;left:0px;top:0px"></div>
-<!-- 지도가 들어갈 영역 끝 -->
+<body>
+<!--map을 띄울 div박스. 여기서는 style을 태그에 바로 적용시켰다.-->
+<div id="map" style="width: 100%; height: 400px; left: 0px; top: 0px"></div>
+<!--토글 버튼을 만들어 보자-->
+<div>
+    <button>위성사진</button>
+</div>
+
+<script type="text/javascript">
+
+    let Base = new ol.layer.Tile({
+        name : "Base",
+        source: new ol.source.XYZ({
+            url: 'http://api.vworld.kr/req/wmts/1.0.0/CEB52025-E065-364C-9DBA-44880E3B02B8/Base/{z}/{y}/{x}.png'  // WMTS API 사용
+        })
+    });
+
+    let OSM = new ol.layer.Tile({
+        name : "Base",
+        source: new ol.source.OSM()
+    });
+
+    // var debug = new ol.layer.Tile({
+    // 	name : "debug",
+    // 	source: new ol.source.TileDebug() //ol 6버전에 생김
+    // }); // 타일의 넘버링을 확인할 수 있음 z: 레벨  / y 위 아래 , x 좌 우    /{z}7/{y}47/{x}111.png
+
+
+/* 이렇게 변수로 지정하여도 괜찮으나, 나는 view에 바로 생성자 만들어주는 것이 더 가독성이 있다.
+    let olView = new ol.View({
+        center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/!*좌표계 변환
+                                                                                    위도 경도를 부산 해운대로 설정해뒀다.*!/
+        zoom: 10
+
+    })// 뷰 설정
+*/
+    let map = new ol.Map({
+//        layers: [OSM,Base], //[OSM,Base,debug]
+        layers: [Base], // <---Base가 VWorld의 베이스임. []빼도 될 것이라 생각했으나, 빼면 오류 뜬다.
+        target: 'map',
+        view: new ol.View({
+            center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/*좌표계 변환
+                                                                                    위도 경도를 부산 해운대로 설정해뒀다.*/
+            zoom: 10
+
+        })// 뷰 설정
+    });//
+</script>
 </body>
 </html>
