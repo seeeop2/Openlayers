@@ -29,6 +29,14 @@ Openlayers 기본지도 생성, WMTS API
         })
     });
 
+    let Satellite = new ol.layer.Tile({
+        name : "Satellite",
+        source: new ol.source.XYZ({
+            url: 'http://api.vworld.kr/req/wmts/1.0.0/CEB52025-E065-364C-9DBA-44880E3B02B8/Satellite/{z}/{y}/{x}.jpeg'  // WMTS API 사용
+            /*자료 확인하면, Satellite는 .png가 아니라 .jpeg다.*/
+        })
+    });
+
     let OSM = new ol.layer.Tile({
         name : "Base",
         source: new ol.source.OSM()
@@ -40,17 +48,17 @@ Openlayers 기본지도 생성, WMTS API
     // }); // 타일의 넘버링을 확인할 수 있음 z: 레벨  / y 위 아래 , x 좌 우    /{z}7/{y}47/{x}111.png
 
 
-/* 이렇게 변수로 지정하여도 괜찮으나, 나는 view에 바로 생성자 만들어주는 것이 더 가독성이 있다.
-    let olView = new ol.View({
-        center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/!*좌표계 변환
-                                                                                    위도 경도를 부산 해운대로 설정해뒀다.*!/
-        zoom: 10
+    /* 이렇게 변수로 지정하여도 괜찮으나, 나는 view에 바로 생성자 만들어주는 것이 더 가독성이 있다.
+        let olView = new ol.View({
+            center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/!*좌표계 변환
+                                                                                        위도 경도를 부산 해운대로 설정해뒀다.*!/
+            zoom: 10
 
-    })// 뷰 설정
-*/
+        })// 뷰 설정
+    */
     let map = new ol.Map({
 //        layers: [OSM,Base], //[OSM,Base,debug]
-        layers: [Base], // <---Base가 VWorld의 베이스임. []빼도 될 것이라 생각했으나, 빼면 오류 뜬다.
+        layers: [Base,Satellite], // <---Base가 VWorld의 베이스임. []빼도 될 것이라 생각했으나, 빼면 오류 뜬다.
         target: 'map',
         view: new ol.View({
             center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/*좌표계 변환
