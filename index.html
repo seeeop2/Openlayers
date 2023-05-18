@@ -17,13 +17,22 @@ Openlayers 기본지도 생성, WMTS API
 <div id="map" style="width: 100%; height: 400px; left: 0px; top: 0px"></div>
 <!--토글 버튼을 만들어 보자-->
 <div>
-    <button onclick="AddSatellite()">위성사진</button>
+    <button onclick="addSatellite()">위성사진</button>
+    <button onclick="addWhite()">화이트</button>
+    <button onclick="addMidnight()">midnight</button>
+    <button onclick="addHybrid()">Hybrid</button>
+
 </div>
 
 <script type="text/javascript">
 
     let checkSatellite = false;
+    let checkWhite = false;
+    let checkMidnight = false;
+    let checkHybrid = false;
 
+
+    /*======================================레이어 모음======================================*/
     let Base = new ol.layer.Tile({
         name : "Base",
         source: new ol.source.XYZ({
@@ -39,10 +48,33 @@ Openlayers 기본지도 생성, WMTS API
         })
     });
 
+    let white = new ol.layer.Tile({
+        name : "white",
+        source: new ol.source.XYZ({
+            url: 'http://api.vworld.kr/req/wmts/1.0.0/CEB52025-E065-364C-9DBA-44880E3B02B8/white/{z}/{y}/{x}.png'  // WMTS API 사용
+        })
+    });
+
+    let MidNight = new ol.layer.Tile({
+        name : "midnight",
+        source: new ol.source.XYZ({
+            url: 'http://api.vworld.kr/req/wmts/1.0.0/CEB52025-E065-364C-9DBA-44880E3B02B8/midnight/{z}/{y}/{x}.png'  // WMTS API 사용
+        })
+    });
+
+    let Hybrid = new ol.layer.Tile({
+        name : "Hybrid",
+        source: new ol.source.XYZ({
+            url: 'http://api.vworld.kr/req/wmts/1.0.0/CEB52025-E065-364C-9DBA-44880E3B02B8/Hybrid/{z}/{y}/{x}.png'  // WMTS API 사용
+        })
+    });
+
+    /*여기서는 OSM 사용할 필요 없다.*/
     let OSM = new ol.layer.Tile({
         name : "Base",
         source: new ol.source.OSM()
     });
+/*======================================레이어 모음======================================*/
 
     // var debug = new ol.layer.Tile({
     // 	name : "debug",
@@ -66,22 +98,58 @@ Openlayers 기본지도 생성, WMTS API
             center: ol.proj.transform([129.1705,35.1614], 'EPSG:4326', 'EPSG:3857'),/*좌표계 변환
                                                                                     위도 경도를 부산 해운대로 설정해뒀다.*/
             zoom: 10
-
         })// 뷰 설정
     });//
 
-
-    function AddSatellite(){    //위성사진 버튼을 클릭하면 layer 추가
+/*======================================클릭 이벤트 모음======================================*/
+    function addSatellite(){    //위성사진 버튼을 클릭하면 layer 추가
         if(checkSatellite){
             map.removeLayer(Satellite);  //removeLayer 메소드 이용하기 좋다.
             // map.addLayer(Base);
             console.log(checkSatellite);
             checkSatellite = false;
         } else{
-        map.addLayer(Satellite);    //addLayer 메소드 이용하기 좋다.
-        checkSatellite = true;
+            map.addLayer(Satellite);    //addLayer 메소드 이용하기 좋다.
+            checkSatellite = true;
         }
     }
+    function addWhite(){    //화이트 버튼을 클릭하면 layer 추가
+        if(checkWhite){
+            map.removeLayer(white);  //removeLayer 메소드 이용하기 좋다.
+            // map.addLayer(Base);
+            console.log(checkWhite);
+            checkWhite = false;
+        } else{
+            map.addLayer(white);    //addLayer 메소드 이용하기 좋다.
+            checkWhite = true;
+        }
+    }
+
+    function addMidnight(){    //화이트 버튼을 클릭하면 layer 추가
+        if(checkMidnight){
+            map.removeLayer(MidNight);  //removeLayer 메소드 이용하기 좋다.
+            // map.addLayer(Base);
+            console.log(checkMidnight);
+            checkMidnight = false;
+        } else{
+            map.addLayer(MidNight);    //addLayer 메소드 이용하기 좋다.
+            checkMidnight = true;
+        }
+    }
+
+    function addHybrid(){    //화이트 버튼을 클릭하면 layer 추가
+        if(checkHybrid){
+            map.removeLayer(Hybrid);  //removeLayer 메소드 이용하기 좋다.
+            // map.addLayer(Base);
+            console.log(checkHybrid);
+            checkHybrid = false;
+        } else{
+            map.addLayer(Hybrid);    //addLayer 메소드 이용하기 좋다.
+            checkHybrid = true;
+        }
+    }
+
+/*======================================클릭 이벤트 모음======================================*/
 </script>
 </body>
 </html>
