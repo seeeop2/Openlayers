@@ -75,7 +75,7 @@ let map = new ol.Map({
 });//
 
 /*======================================클릭 이벤트 모음======================================*/
-function addSatellite(){    //위성사진 버튼을 클릭하면 layer 추가
+function addSatellite(){    //'위성사진' 버튼을 클릭하면 layer 추가
     if(checkSatellite){
         map.removeLayer(Satellite);  //removeLayer 메소드 이용하기 좋다.
         // map.addLayer(Base);
@@ -86,7 +86,7 @@ function addSatellite(){    //위성사진 버튼을 클릭하면 layer 추가
         checkSatellite = true;
     }
 }
-function addWhite(){    //화이트 버튼을 클릭하면 layer 추가
+function addWhite(){    //'화이트' 버튼을 클릭하면 layer 추가
     if(checkWhite){
         map.removeLayer(white);  //removeLayer 메소드 이용하기 좋다.
         // map.addLayer(Base);
@@ -98,7 +98,7 @@ function addWhite(){    //화이트 버튼을 클릭하면 layer 추가
     }
 }
 
-function addMidnight(){    //화이트 버튼을 클릭하면 layer 추가
+function addMidnight(){    //'Midnight' 버튼을 클릭하면 layer 추가
     if(checkMidnight){
         map.removeLayer(MidNight);  //removeLayer 메소드 이용하기 좋다.
         // map.addLayer(Base);
@@ -110,7 +110,7 @@ function addMidnight(){    //화이트 버튼을 클릭하면 layer 추가
     }
 }
 
-function addHybrid(){    //화이트 버튼을 클릭하면 layer 추가
+function addHybrid(){    //'Hybrid' 버튼을 클릭하면 layer 추가
     if(checkHybrid){
         map.removeLayer(Hybrid);  //removeLayer 메소드 이용하기 좋다.
         // map.addLayer(Base);
@@ -121,4 +121,18 @@ function addHybrid(){    //화이트 버튼을 클릭하면 layer 추가
         checkHybrid = true;
     }
 }
+
+function removeAll(){    //'Reset' 버튼을 클릭하면 Base 레이어만 남기기
+    map.removeLayer(Satellite);
+    map.removeLayer(white);
+    map.removeLayer(MidNight);
+    map.removeLayer(Hybrid);
+
+    checkSatellite = false;
+    checkWhite = false;
+    checkMidnight = false;
+    checkHybrid = false;
+}
+
+
 /*======================================클릭 이벤트 모음======================================*/
