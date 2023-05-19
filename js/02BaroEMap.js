@@ -6,7 +6,7 @@ window.onload = function(){
 };
 */
 
-/*
+/* 배경지도 전환버튼 생성
 window.onload = function(){
     map1 = new ngii_wmts.map("map1",{mapMode:0});
     /!*
@@ -18,9 +18,20 @@ window.onload = function(){
 };
 */
 
+/* 기본 컨트롤러 사용
 window.onload = function(){
     map1 = new ngii_wmts.map("map1");
     map1._gfn_add_vector();
 };
+*/
 
-
+window.onload = function(){
+    map1 = new ngii_wmts.map("map1",{
+        center:[960561.862625, 1919786.384620],
+        extent:[958551.04896058,1917735.5150606,962551.04896058,1921735.5150606],   //동,서,남,북
+        zoom:6,
+        minZoom:6,
+        maxZoom:14,
+        mapMode:0
+    });
+};
