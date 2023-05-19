@@ -7,10 +7,18 @@
     <link rel="stylesheet" href="ol/ol.css" type="text/css">
     <script type="text/javascript" src="ol/ol.js"></script>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <!--특정 기능이 지원되지 않은 브라우저를 위해 사용할 수 있는 코드 조각이나 플러그인을 말한다.
+        Polyfill은 HTML5 및 CSS3를 사용하는데 있어 오래된 브라우저 사이의 간격을 메꾸는 역할
+
+        폭넓은 브라우저를 지원할 수 있다는 장점이 있지만
+        불러와야 하는 JavaScript 코드가 많아진다는 단점 발생.
+        실행해야 하는 Polyfill 스크립트가 많아질수록 사용자가 경험하는 웹 서비스의 성능은 나빠진다.
+    -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.4/proj4.js"></script>
+    <!--다양한 좌표계 변환을 제공하는 라이브러리 proj4-->
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <!--바로 E맵 사용을 위한 CDN , 오픈 API 신청하면 승인 날 때까지 대기 해야 한다.-->
     <script type="text/javascript" src="http://map.ngii.go.kr/openapi/wmts_ngiiMap_v6.4.3.js?apikey=3BB3E806EA72C996742267FE0D71D751"></script>
+    <!--바로 E맵 사용을 위한 CDN , 오픈 API 신청하면 승인 날 때까지 대기 해야 한다.-->
 
 </head>
 <body>
