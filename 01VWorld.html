@@ -10,8 +10,16 @@ Openlayers 기본지도 생성, WMTS API
     <link rel="stylesheet" 	href="ol/ol.css" type="text/css">
     <!--제이쿼리 사용을 위한 CDN-->
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <!--바로 E맵 사용을 위한 CDN , 오픈 API 신청하면 승인 날 때까지 대기 해야 한다.-->
-<!--    <script type="text/javascript" src="http://map.ngii.go.kr/openapi/wmts_ngiiMap_v6.4.3.js?apikey=3BB3E806EA72C996742267FE0D71D751"></script>-->
+    <style>
+        .Btn{
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+        .Btn:nth-child(5){
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,19 +27,18 @@ Openlayers 기본지도 생성, WMTS API
 <div id="map" style="width: 100%; height: 600px; left: 0px; top: 0px"></div>
 <!--토글 버튼을 만들어 보자-->
 <div>
-    <button onclick="addSatellite()">위성사진</button>
-    <button onclick="addWhite()">화이트</button>
-    <button onclick="addMidnight()">midnight</button>
-    <button onclick="addHybrid()">Hybrid</button>
-    <button onclick="removeAll()">Reset</button>
+    <button onclick="addSatellite()" class="Btn">위성사진</button>
+    <button onclick="addWhite()" class="Btn">화이트</button>
+    <button onclick="addMidnight()" class="Btn">midnight</button>
+    <button onclick="addHybrid()" class="Btn">Hybrid</button>
+    <button onclick="removeAll()" class="Btn">Reset</button>
 </div>
-<div style="margin: 10px 0;">
-    <button id="zoom-out">Zoom out</button>
-    <button id="zoom-in">Zoom in</button>
+<div>
+    <button id="zoom-out" class="Btn">Zoom out</button>
+    <button id="zoom-in" class="Btn">Zoom in</button>
 </div>
 
-
-<script src="main.js"></script> <!--위에 적으면 지도 표시 되지 않는다.
+<script src="js/01VWorld.js"></script> <!--위에 적으면 지도 표시 되지 않는다.
                                     꼭 body 끝나는 부분에 적어주자.-->
 </body>
 </html>

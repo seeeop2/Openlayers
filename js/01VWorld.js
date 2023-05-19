@@ -1,9 +1,8 @@
 
-let checkSatellite = false;
+let checkSatellite = false; //es6부터 let
 let checkWhite = false;
 let checkMidnight = false;
 let checkHybrid = false;
-
 
 /*======================================레이어 모음======================================*/
 let Base = new ol.layer.Tile({
@@ -47,6 +46,8 @@ let OSM = new ol.layer.Tile({
     name : "Base",
     source: new ol.source.OSM()
 });
+
+
 /*======================================레이어 모음======================================*/
 
 // var debug = new ol.layer.Tile({
@@ -79,7 +80,6 @@ function addSatellite(){    //'위성사진' 버튼을 클릭하면 layer 추가
     if(checkSatellite){
         map.removeLayer(Satellite);  //removeLayer 메소드 이용하기 좋다.
         // map.addLayer(Base);
-        console.log(checkSatellite);
         checkSatellite = false;
     } else{
         map.addLayer(Satellite);    //addLayer 메소드 이용하기 좋다.
@@ -134,17 +134,18 @@ function removeAll(){    //'Reset' 버튼을 클릭하면 Base 레이어만 남�
     checkHybrid = false;
 }
 
+
 $("#zoom-in").click(function(){
     const view = map.getView();     //const 상수라 중복되는 것이 싫어서 함수 밖에 선언했으나, 한번만 확대, 축소가 되는 현상이 발생
     const zoom = view.getZoom();    //따라서, 함수 안에 선언 해주는 것이 맞는 듯
     view.setZoom(zoom + 1);
+    console.log(map.getView());
 })
 
 $("#zoom-out").click(function(){
     const view = map.getView();
     const zoom = view.getZoom();
     view.setZoom(zoom - 1);
-
 })
 
 /*======================================클릭 이벤트 모음======================================*/
